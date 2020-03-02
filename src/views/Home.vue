@@ -16,13 +16,22 @@ export default {
     };
   },
   mounted: function() {
-    mapboxgl.accessToken = '<your access token>';
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHphZ2hpYW4iLCJhIjoiY2pzbnF0NmV0MGY2czQzbXBpMjcwMzRmNiJ9.Jei4-17Vu7hJSerisjPCEg';
     var map = new mapboxgl.Map({
         container: 'map', // container id
         style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-        center: [-87.623177, 41.881832], // starting position [lng, lat]
+        center: [-122.4194, 37.7749], // starting position [lng, lat]
         zoom: 12 // starting zoom
     });
+
+    var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+    'Historic Chinatown, SF'
+    );
+
+    var marker = new mapboxgl.Marker()
+      .setLngLat([-122.4078, 37.7941])
+      .setPopup(popup)
+      .addTo(map);
   },
   methods: {}
 };
