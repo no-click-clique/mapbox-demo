@@ -12,26 +12,40 @@
 export default {
   data: function() {
     return {
-      message: "Welcome to Vue.js!"
+      places: [
+        {
+          lat: 37.974728,
+          long: -122.03711,
+          description: "Alpine Bakery in Concord, delicious pastries!"
+        },
+        {
+          lat: 36.973804,
+          long: -122.02575,
+          description: "Marinis is my favorite ice cream in Santa Cruz"
+        },
+        {
+          lat: 37.791852,
+          long: -122.42127,
+          description: "Bob's Donuts in SF makes gigantic donuts, good for sharing (or eating alone!)"
+        }
+      ]
     };
   },
   mounted: function() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZHphZ2hpYW4iLCJhIjoiY2pzbnF0NmV0MGY2czQzbXBpMjcwMzRmNiJ9.Jei4-17Vu7hJSerisjPCEg';
+    mapboxgl.accessToken = '<your access token>';
     var map = new mapboxgl.Map({
         container: 'map', // container id
-        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+        style: 'mapbox://styles/dzaghian/cjxaqxm273umk1cqz0saddk4t', // stylesheet location
         center: [-122.4194, 37.7749], // starting position [lng, lat]
-        zoom: 12 // starting zoom
+        zoom: 7 // starting zoom
     });
-
-    var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-    'Historic Chinatown, SF'
-    );
-
-    var marker = new mapboxgl.Marker()
-      .setLngLat([-122.4078, 37.7941])
-      .setPopup(popup)
-      .addTo(map);
+    this.places.forEach(place => {
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText(place.description);
+      var marker = new mapboxgl.Marker()
+        .setLngLat([place.long, place.lat])
+        .setPopup(popup)
+        .addTo(map);
+    });
   },
   methods: {}
 };
