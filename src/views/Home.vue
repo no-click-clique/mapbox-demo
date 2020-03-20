@@ -31,8 +31,43 @@ export default {
       ]
     };
   },
+  created: function() {
+    // do mapbox after axios promise to ensure data from the backend exists before trying to geocode address
+
+    // axios.get("/api/events/1").then(response => {
+    //   this.event = response.data;
+    //   mapboxgl.accessToken = '<your access token>';
+    //   var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+    //   mapboxClient.geocoding
+    //     .forwardGeocode({
+    //       query: this.event.address,
+    //       autocomplete: false,
+    //       limit: 1
+    //     })
+    //     .send()
+    //     .then(function(response) {
+    //       if (
+    //         response &&
+    //         response.body &&
+    //         response.body.features &&
+    //         response.body.features.length
+    //       ) {
+    //         var feature = response.body.features[0];
+           
+    //         var map = new mapboxgl.Map({
+    //           container: 'map',
+    //           style: 'mapbox://styles/mapbox/streets-v11',
+    //           center: feature.center,
+    //           zoom: 10
+    //         });
+    //         new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+    //       }
+    //     });
+    // })
+  },
   mounted: function() {
-    mapboxgl.accessToken = '<your access token>';
+    // basic example with hardcoded string of geocoding
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHphZ2hpYW4iLCJhIjoiY2pzbnF0NmV0MGY2czQzbXBpMjcwMzRmNiJ9.Jei4-17Vu7hJSerisjPCEg';
     var map = new mapboxgl.Map({
         container: 'map', // container id
         style: 'mapbox://styles/dzaghian/cjxaqxm273umk1cqz0saddk4t', // stylesheet location
@@ -46,6 +81,32 @@ export default {
         .setPopup(popup)
         .addTo(map);
     });
+    // var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+    // mapboxClient.geocoding
+    //   .forwardGeocode({
+    //     query: '520 8th Avenute, NY',
+    //     autocomplete: false,
+    //     limit: 1
+    //   })
+    //   .send()
+    //   .then(function(response) {
+    //     if (
+    //       response &&
+    //       response.body &&
+    //       response.body.features &&
+    //       response.body.features.length
+    //     ) {
+    //       var feature = response.body.features[0];
+         
+    //       var map = new mapboxgl.Map({
+    //         container: 'map',
+    //         style: 'mapbox://styles/mapbox/streets-v11',
+    //         center: feature.center,
+    //         zoom: 10
+    //       });
+    //       new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+    //     }
+    //   });
   },
   methods: {}
 };
